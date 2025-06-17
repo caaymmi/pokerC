@@ -15,9 +15,14 @@ int main (){
 
     CARTA baralho[52];
     CARTA sequencia_aux[7];
+    LISTA jogadores;
     FILE *rankings;
 
     rankings = fopen("Rankings.txt", "a+");
+
+    preencher_lista_jogadores(&jogadores);
+    
+    exibir_jogadores(jogadores);
 
     if (rankings == NULL){
         printf ("Erro na abertura do arquivo!\n");

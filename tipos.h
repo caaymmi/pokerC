@@ -3,6 +3,11 @@
 
 #define MAX 120
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <ctype.h>
+
 typedef struct{
 
     int id, naipe, valor;
