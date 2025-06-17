@@ -14,6 +14,22 @@ typedef struct{
 
 } CARTA;
 
+typedef struct conexaoc{
+
+    CARTA carta;
+    struct conexaoc* prox;
+
+}ELEMENTOc;
+
+typedef ELEMENTOc* PONTc;
+
+typedef struct{
+
+    PONTc topo;
+    int tamanho;
+
+}PILHA;
+
 typedef struct{
 
     char nome[MAX];

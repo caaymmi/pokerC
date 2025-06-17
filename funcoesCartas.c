@@ -5,18 +5,30 @@
 
 #include "funcoesCartas.h"
 
-void criar_baralho(CARTA* baralho_novo){
+void inicializar_cartas(CARTA* baralho_novo){
 
     for (int indice = 0; indice < 52; indice++){
 
+        //Atribui às cartas os id's como de 1 a 52 com base nos índices,
+        //Que vão do 0 ao 51.
         baralho_novo[indice].id = indice+1;
         
+
         baralho_novo[indice].valor = (indice+1) % 13;
-        if (!baralho_novo[indice].valor)
+
+        if (baralho_novo[indice].valor == 0)
             baralho_novo[indice].valor = 13;
+
+        //Atribui o ás o valor 14, para fins de straights,
+        //Isso deve ser corrigido depois para que funcione melhor,
+        //Considerando os casos em que ele valerá 1.
         if (baralho_novo[indice].valor == 1)
             baralho_novo[indice].valor = 14;
 
+        //A primeira sequência de 13 cartas pertence ao naipe de copas, que é representado pelo 1;
+        //A segunda sequência de 13 cartas pertence ao naipe de espadas, que é representado pelo 2;    
+        //A terceira sequência de 13 cartas pertence ao naipe de ouros, que é representado pelo 3;    
+        //A quarta sequência de 13 cartas pertence ao naipe de paus, que é representado pelo 4.
         if (baralho_novo[indice].id <= 13)
             baralho_novo[indice].naipe = 1;
         else if (baralho_novo[indice].id <= 26) 
@@ -43,6 +55,14 @@ void embaralhar(CARTA *baralho){
         baralho[i] = baralho[j];
         baralho[j] = temp;
 
+    }
+
+}
+
+void preencher_baralho_cartas(PILHA* baralho, CARTA *cartas){
+
+    for (int i = 51; i >= 0; i--){
+        inserir_carta_pilha(baralho, cartas[i]);
     }
 
 }

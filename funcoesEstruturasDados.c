@@ -78,3 +78,36 @@ bool excluir_jogador_lista(LISTA* lista, int id_jogador){
     return false;
 
 }
+
+void inicializar_pilha(PILHA* pilha){
+
+    pilha->topo = NULL;
+    pilha->tamanho = 0;
+
+}
+
+void inserir_carta_pilha(PILHA* pilha, CARTA nova_carta){
+
+    PONTc novo_elemento = (ELEMENTOc *) malloc(sizeof(ELEMENTOc));
+
+    novo_elemento->carta = nova_carta;
+    novo_elemento->prox = pilha->topo;
+
+    pilha->topo = novo_elemento;
+
+    pilha->tamanho++;
+
+}
+
+//Fazer com que essa função nunca seja chamada caso a pilha esteja vazia.
+CARTA retirar_carta_pilha(PILHA* pilha){
+    
+    PONTc pAux = pilha->topo;
+
+    pilha->topo = pAux->prox;
+    pAux->prox = NULL;
+    pilha->tamanho--;
+
+    return pAux->carta;
+
+}
