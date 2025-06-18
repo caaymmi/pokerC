@@ -39,9 +39,18 @@ int main (){
     //Distribuição das cartas para as mãos dos jogadores.
     distribuicao_cartas_jogadores(&jogadores, &baralho);
     
+    CARTA mesa_cartas[5];
+
+    for (int k = 0; k < 5; k++)
+        mesa_cartas[k] = retirar_carta_pilha(&baralho);
+
+    for (int k = 0; k < 5; k++)
+        exibir_carta(mesa_cartas[k]);
+
     printf("\n\n\n\nPRINTANDO A PILHA\n\n\n\n");
 
     exibir_baralho(baralho);
+
 
     // rankings = fopen("Rankings.txt", "a+");
 
