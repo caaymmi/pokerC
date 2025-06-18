@@ -6,6 +6,7 @@
 #include "tipos.h"
 #include "dicio.h"
 #include "sequencias.h"
+#include "funcoesJogo.h"
 #include "funcoesCartas.h"
 #include "funcoesJogadores.h"
 #include "funcoesEstruturasDados.h"
@@ -21,26 +22,25 @@ int main (){
     PONTc pcAux;
     // FILE *rankings;
 
-    // inicializar_lista(&jogadores);
-    // preencher_lista_jogadores(&jogadores);
-    // exibir_jogadores(jogadores);
+    inicializar_lista(&jogadores);
+    preencher_lista_jogadores(&jogadores);
+    exibir_jogadores(jogadores);
 
     inicializar_cartas(cartas);
     srand(time(NULL));
     embaralhar(cartas);
-    exibir_baralho(cartas);
+    exibir_vetor_cartas(cartas);
     
     inicializar_pilha(&baralho);
     preencher_baralho_cartas(&baralho, cartas);
 
+    printf("\n\n\n\nPRINTANDO AS MAOS\n\n\n\n");
+
+    distribuicao_cartas_jogadores(&jogadores, &baralho);
+    
     printf("\n\n\n\nPRINTANDO A PILHA\n\n\n\n");
 
-    pcAux = baralho.topo;
-
-    while (pcAux){
-        exibir_carta(pcAux->carta);
-        pcAux = pcAux->prox;
-    }
+    exibir_baralho(baralho);
 
     // rankings = fopen("Rankings.txt", "a+");
 
