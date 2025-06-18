@@ -1,4 +1,7 @@
 17 de junho de 2025, 10pm:
-    -Voltar a trabalhar na implementação da verificação de sequências;
+    -Voltar a trabalhar na implementação da verificação de sequências,
+     para selecionar a melhor sequência possível, e começar a implementar isso
+     e/ou verificar algo melhor que a implementação atual do frequency counter;
+     
     -Voltar a tentar calcular as probabilidades de sequências, com base
      nos resultados dados pelas sequências testes executadas.
