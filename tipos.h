@@ -3,11 +3,32 @@
 
 #define MAX 120
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <ctype.h>
+
 typedef struct{
 
     int id, naipe, valor;
 
 } CARTA;
+
+typedef struct conexaoc{
+
+    CARTA carta;
+    struct conexaoc* prox;
+
+}ELEMENTOc;
+
+typedef ELEMENTOc* PONTc;
+
+typedef struct{
+
+    PONTc topo;
+    int tamanho;
+
+}PILHA;
 
 typedef struct{
 
