@@ -67,16 +67,6 @@ void preencher_baralho_cartas(PILHA* baralho, CARTA *cartas){
 
 }
 
-void exibir_baralho(CARTA *baralho){
-
-    for (int indice = 0; indice < 52; indice++){
-
-        exibir_carta(baralho[indice]);
-
-    }
-
-}
-
 void exibir_carta(CARTA carta){
 
     printf ("\nCARTA de ID: %d\n", carta.id);
@@ -108,6 +98,29 @@ void exibir_carta(CARTA carta){
         case 3: printf ("Ouros\n"); break;
         case 4: printf ("Paus\n"); break;
         default: break;
+
+    }
+
+}
+
+void exibir_baralho(PILHA baralho){
+    
+    PONTc pcAux = baralho.topo;
+
+    while (pcAux){
+    
+        exibir_carta(pcAux->carta);
+        pcAux = pcAux->prox;
+
+    }
+
+}
+
+void exibir_vetor_cartas(CARTA *baralho){
+
+    for (int indice = 0; indice < 52; indice++){
+
+        exibir_carta(baralho[indice]);
 
     }
 
