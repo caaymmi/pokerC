@@ -156,8 +156,12 @@ bool straight(int *frequencias_valores){
 
     int consecutivos = 0;
 
+    //Parte do fim do vetor de frequências para que
+    //Assim que encontrar o maior straight possível o retorn.
     for (int i = 14; i >= 2; i--){
 
+        //Verifica se o valor atual aparece na sequência.
+        //Caso não apareça, reseta o contador de números consecutivos.
         if (frequencias_valores[i] > 0){
             consecutivos++;
             if (consecutivos == 5)

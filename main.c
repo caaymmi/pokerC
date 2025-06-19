@@ -22,18 +22,23 @@ int main (){
     // FILE *rankings;
 
     //Preenchimento da lista de jogadores.
-    inicializar_lista(&jogadores);
-    preencher_lista_jogadores(&jogadores);
-    exibir_jogadores(jogadores);
+    {
+        inicializar_lista(&jogadores);
+        preencher_lista_jogadores(&jogadores);
+        exibir_jogadores(jogadores);
+    }
 
     //Preenchimento do baralho de cartas.
-    inicializar_cartas(cartas);
-    srand(time(NULL));
-    embaralhar(cartas);
-    // exibir_vetor_cartas(cartas, 52);
-    inicializar_pilha(&baralho);
-    preencher_baralho_cartas(&baralho, cartas);
+    {
+        inicializar_cartas(cartas);
+        srand(time(NULL));
+        embaralhar(cartas);
+        // exibir_vetor_cartas(cartas, 52);
+        inicializar_pilha(&baralho);
+        preencher_baralho_cartas(&baralho, cartas);
 
+    }
+    
     printf("\n\n\n\nPRINTANDO AS MAOS\n\n\n\n");
 
     //Distribuição das cartas para as mãos dos jogadores.
