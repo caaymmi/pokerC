@@ -103,13 +103,10 @@ void exibir_baralho(PILHA baralho){
 
 }
 
-void exibir_vetor_cartas(CARTA *baralho){
+void exibir_vetor_cartas(CARTA *baralho, int tamanho){
 
-    for (int indice = 0; indice < 52; indice++){
-
+    for (int indice = 0; indice < tamanho; indice++)
         exibir_carta(baralho[indice]);
-
-    }
 
 }
 

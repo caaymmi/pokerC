@@ -30,7 +30,7 @@ int main (){
     inicializar_cartas(cartas);
     srand(time(NULL));
     embaralhar(cartas);
-    exibir_vetor_cartas(cartas);
+    // exibir_vetor_cartas(cartas, 52);
     inicializar_pilha(&baralho);
     preencher_baralho_cartas(&baralho, cartas);
 
@@ -41,15 +41,36 @@ int main (){
     
     CARTA mesa_cartas[5];
 
-    for (int k = 0; k < 5; k++)
+    PONTj pjAux = jogadores.inicio;
+
+    printf("\n\n\n\nPRINTANDO AS CARTAS DA MESA \n\n\n\n");
+
+    for (int k = 0; k < 5; k++){
         mesa_cartas[k] = retirar_carta_pilha(&baralho);
-
-    for (int k = 0; k < 5; k++)
         exibir_carta(mesa_cartas[k]);
+    }
 
-    printf("\n\n\n\nPRINTANDO A PILHA\n\n\n\n");
+    while (pjAux){
 
-    exibir_baralho(baralho);
+        for (int k = 0; k < 5; k++)
+            pjAux->jogador.sequencia_aux[k] = mesa_cartas[k];
+        pjAux->jogador.sequencia_aux[5] = pjAux->jogador.mao[0];
+        pjAux->jogador.sequencia_aux[6] = pjAux->jogador.mao[1];
+
+        printf("\n\n\n\nPRINTANDO A SEQUENCIA AUXILIAR DO %s\n\n\n\n", pjAux->jogador.nome);
+
+        exibir_vetor_cartas(pjAux->jogador.sequencia_aux, 7);
+
+        pjAux->jogador.ranking = verificar_sequencia(pjAux->jogador.sequencia_aux);
+
+        pjAux = pjAux->prox;
+    }
+
+
+
+    // printf("\n\n\n\nPRINTANDO A PILHA\n\n\n\n");
+
+    // exibir_baralho(baralho);
 
 
     // rankings = fopen("Rankings.txt", "a+");
