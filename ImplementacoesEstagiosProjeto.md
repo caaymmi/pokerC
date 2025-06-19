@@ -28,7 +28,7 @@ Com o **código anterior** o **Par de Duplas** seria composto por uma **dupla de
 Com o **novo código** será reconhecido a **trinca de 10 e o par de 9.**  
 Com o **código anterior** o **Full House** seria composto por uma **trinca de 9 e o par de 10**.  
 
-### Mais de um straight, dois straights ou três straights
+### Mais de um straight, dois straights ou três straights.
 
 | Valor     | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 |
 |----------:|---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|
