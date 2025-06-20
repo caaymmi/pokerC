@@ -1,91 +1,124 @@
 #include <stdio.h>
+#include <string.h>
 #include <stdbool.h>
 
 #include "tipos.h"
 #include "sequencias.h"
 
+FREQ_COUNTER frequency_counter(CARTA *cartas_jogador, CARTA *cartas_mesa){
+
+    FREQ_COUNTER frequencias;
+    int chave_valor, chave_naipe, k;
+
+    memset(frequencias.valores, 0, sizeof(frequencias.valores));
+    memset(frequencias.naipes, 0, sizeof(frequencias.naipes));
+
+    for (int i = 0; i < 5; i++) 
+        frequencias.sequencia_aux[i] = cartas_mesa[i];
+
+    for (int i = 0; i < 2; i++)
+        frequencias.sequencia_aux[5 + i] = cartas_jogador[i];
+    
+    for (int i = 0; i < 7; i++){
+        chave_valor = frequencias.sequencia_aux[i].valor;
+        chave_naipe = frequencias.sequencia_aux[i].naipe;
+        frequencias.valores[chave_valor]++;
+        frequencias.naipes[chave_naipe]++;
+    }
+
+    return frequencias;
+
+};
+
 int verificar_sequencia(CARTA *cartas_jogador, CARTA *cartas_mesa){
 
-    //Atribui a essa sequência de cartas auxiliar as cartas da mesa e do jogador.
-    //Sendo as cinco primeiras as cartas da mesa e as duas últimas as cartas do jogador.    
-    CARTA cartas[7] = { cartas_mesa[0],
-        cartas_mesa[1], cartas_mesa[2],
-        cartas_mesa[3], cartas_mesa[4],
-        cartas_jogador[0], cartas_jogador[1]};
+    FREQ_COUNTER freq;
 
-    //frequency_counter.
-    int frequencias_naipe[5] = {0};
-    int frequencias_valor[15] = {0};
-    int chave_valor, chave_naipe;
-
-    //Perpassa a sequência de cartas na mão do jogador.
-    for (int i = 0; i < 7; i++){
-
-        // printf ("\nRODANDO O FREQUENCY COUNTER: %d\n\n", i);
-
-        chave_valor = cartas[i].valor;
-        // printf ("CHAVE_VALOR = %d\n", chave_valor);
-        frequencias_valor[chave_valor]++;
-        // printf ("FREQUENCIAS_VALOR %d = %d\n", chave_valor, frequencias_valor[chave_valor]);
-
-        chave_naipe = cartas[i].naipe;
-        // printf ("CHAVE_NAIPE = %d\n", chave_naipe);
-        frequencias_naipe[chave_naipe]++;
-        // printf ("FREQUENCIAS_NAIPE %d = %d\n", chave_naipe, frequencias_naipe[chave_naipe]);
-
-
-    }
+    freq = frequency_counter(cartas_jogador, cartas_mesa);
+    // Retornando a melhor sequencia possível
 
     //ORGANIZAR A ORDEM DOS IF'S E ELSE'S
 
     //Funcionando, porém ainda não está perfeito.
-    if (quadra(frequencias_valor)){
+    if (quadra(freq.valores)){
         printf ("\nA sua sequencia tem uma quadra.\n");
         printf ("RANKING: TOP 3");
         return 3;
     }
     //Funcionando, porém ainda não está perfeito.
-    else if(full_house(frequencias_valor)){
+    else if(full_house(freq.valores)){
         printf ("\nA sua sequencia tem um full house.\n");
         printf ("RANKING: TOP 4");
         return 4;
 
     }
     //Funcionando, porém ainda não está perfeito.
-    else if (duas_duplas(frequencias_valor)){
+    else if (duas_duplas(freq.valores)){
         printf ("\nA sua sequencia tem duas duplas.\n");
         printf ("RANKING: TOP 8");
         return 8;
 
     }
     //Funcionando, porém ainda não está perfeito.
-    else if (trinca(frequencias_valor)){
+    else if (trinca(freq.valores)){
         printf ("\nA sua sequencia tem uma trinca.\n");
         printf ("RANKING: TOP 7");
         return 7;
 
     }
     //Funcionando, porém ainda não está perfeito.
-    else if (uma_dupla(frequencias_valor)){
+    else if (uma_dupla(freq.valores)){
         printf ("\nA sua sequencia tem uma dupla.\n");
         printf ("RANKING: TOP 9");
+
+        // k = 0;
+        // int valor_repetido;
+
+        // //VERSAO 1
+        // for (int i = 14; i >= 0; i--){
+        //     if (freq.valores[i] == 2)
+        //         valor_repetido = i;
+        // }
+        // for (int j = 0; j < 7; j++)
+        //     if (cartas[j].valor == valor_repetido){
+        //         melhor_sequencia[k] = cartas[j];
+        //         k++;
+        //     }
+
+        //  //VERSAO 2
+        // for (int i = 14; i >= 0; i--){
+        //     //Identifica o valor que é dupla.
+        //     if (freq.valores[i] == 2){
+                
+        //         //Percorre o vetor de cartas para atribuir
+        //         //As cartas para a sequência que será retornada.
+
+        //         for (int j = 0; j < 7; j++)
+        //             if (cartas[j].valor == i){
+        //                 melhor_sequencia[k] = cartas[j];
+        //                 k++;
+        //             }
+
+        //     }
+        // }
+
         return 9;
 
     }
 
-    if (straight_flush(frequencias_valor, frequencias_naipe)){
+    if (straight_flush(freq.valores, freq.naipes)){
         printf ("\nA sua sequencia tem um straight flush.\n");
         printf ("RANKING: TOP 2");
         return 2;
 
     }
-    else if (straight(frequencias_valor)){
+    else if (straight(freq.valores)){
         printf ("\nA sua sequencia tem um straight.\n");
         printf ("RANKING: TOP 6");
         return 6;
 
     }
-    else if (flush(frequencias_naipe)){
+    else if (flush(freq.naipes)){
         printf ("\nA sua sequencia tem um flush.\n");
         printf ("RANKING: TOP 5");
         return 5;
@@ -107,6 +140,31 @@ bool uma_dupla(int *frequencias_valores){
     return false;
 
 }
+int dupla(FREQ_COUNTER *freq){
+
+    int cont_duplas = 0;
+    int valores_repetidos[3] = {0};
+
+    for (int i = 14; i >= 0; i--){
+        
+        if (freq->valores[i] == 2){
+            valores_repetidos[cont_duplas] = i;
+            cont_duplas++;
+        }
+
+    }
+
+    for (int i = 7; i >= 0; i--){
+        if (valores_repetidos[0] == freq->sequencia_aux[i].valor){
+            
+        }
+    }
+
+
+    return cont_duplas;
+
+}
+
 
 bool duas_duplas(int *frequencias_valores){
 
