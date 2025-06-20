@@ -14,17 +14,17 @@ int verificar_sequencia(CARTA *cartas){
     //Perpassa a sequência de cartas na mão do jogador.
     for (int i = 0; i < 7; i++){
 
-        printf ("\nRODANDO O FREQUENCY COUNTER: %d\n\n", i);
+        // printf ("\nRODANDO O FREQUENCY COUNTER: %d\n\n", i);
 
         chave_valor = cartas[i].valor;
-        printf ("CHAVE_VALOR = %d\n", chave_valor);
+        // printf ("CHAVE_VALOR = %d\n", chave_valor);
         frequencias_valor[chave_valor]++;
-        printf ("FREQUENCIAS_VALOR %d = %d\n", chave_valor, frequencias_valor[chave_valor]);
+        // printf ("FREQUENCIAS_VALOR %d = %d\n", chave_valor, frequencias_valor[chave_valor]);
 
         chave_naipe = cartas[i].naipe;
-        printf ("CHAVE_NAIPE = %d\n", chave_naipe);
+        // printf ("CHAVE_NAIPE = %d\n", chave_naipe);
         frequencias_naipe[chave_naipe]++;
-        printf ("FREQUENCIAS_NAIPE %d = %d\n", chave_naipe, frequencias_naipe[chave_naipe]);
+        // printf ("FREQUENCIAS_NAIPE %d = %d\n", chave_naipe, frequencias_naipe[chave_naipe]);
 
 
     }
@@ -85,13 +85,15 @@ int verificar_sequencia(CARTA *cartas){
 
     }
 
+    printf ("\nA sua sequencia e uma carta alta.\n");
+    printf ("RANKING: TOP 10");
     return 10;
 
 }
 
 bool uma_dupla(int *frequencias_valores){
     
-    for (int i = 0; i < 15; i++)
+    for (int i = 14; i >= 0; i--)
         if (frequencias_valores[i] == 2)
             return true;
     
@@ -103,7 +105,7 @@ bool duas_duplas(int *frequencias_valores){
 
     int contador = 0;
 
-    for (int i = 0; i < 15; i++)
+    for (int i = 14; i >= 0; i--)
         if (frequencias_valores[i] == 2)
             contador++;
     
@@ -116,7 +118,7 @@ bool duas_duplas(int *frequencias_valores){
 
 bool trinca(int *frequencias_valores){
     
-    for (int i = 0; i < 15; i++)
+    for (int i = 14; i >= 0; i--)
         if (frequencias_valores[i] == 3)
             return true;
     
@@ -126,7 +128,7 @@ bool trinca(int *frequencias_valores){
 
 bool quadra(int *frequencias_valores){
         
-    for (int i = 0; i < 15; i++)
+    for (int i = 14; i >= 0; i--)
         if (frequencias_valores[i] == 4)
             return true;
     
@@ -152,17 +154,21 @@ bool flush(int *frequencias_naipes){
 
 bool straight(int *frequencias_valores){
 
-    int verificador = 0;
+    int consecutivos = 0;
 
-    for (int i = 0; i < 15; i++){
+    //Parte do fim do vetor de frequências para que
+    //Assim que encontrar o maior straight possível o retorn.
+    for (int i = 14; i >= 2; i--){
 
-        if (frequencias_valores[i] >= 1 && frequencias_valores[i+1] >= 1){
-            verificador++;
-            if (verificador >= 4)
+        //Verifica se o valor atual aparece na sequência.
+        //Caso não apareça, reseta o contador de números consecutivos.
+        if (frequencias_valores[i] > 0){
+            consecutivos++;
+            if (consecutivos == 5)
                 return true;
         }
         else{
-            verificador = 0;
+            consecutivos = 0;
         }
 
     }

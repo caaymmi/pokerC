@@ -16,35 +16,67 @@ void sequencia_teste(CARTA *sequencia, CARTA *cartas);
 int main (){
 
     CARTA cartas[52];
-    CARTA sequencia_aux[7];
     LISTA jogadores;
     PILHA baralho;
     // FILE *rankings;
 
     //Preenchimento da lista de jogadores.
-    inicializar_lista(&jogadores);
-    preencher_lista_jogadores(&jogadores);
-    exibir_jogadores(jogadores);
+    {
+        inicializar_lista(&jogadores);
+        preencher_lista_jogadores(&jogadores);
+        exibir_jogadores(jogadores);
+    }
 
     //Preenchimento do baralho de cartas.
-    inicializar_cartas(cartas);
-    srand(time(NULL));
-    embaralhar(cartas);
-    exibir_vetor_cartas(cartas);
-    inicializar_pilha(&baralho);
-    preencher_baralho_cartas(&baralho, cartas);
+    {
+        inicializar_cartas(cartas);
+        srand(time(NULL));
+        embaralhar(cartas);
+        // exibir_vetor_cartas(cartas, 52);
+        inicializar_pilha(&baralho);
+        preencher_baralho_cartas(&baralho, cartas);
 
+    }
+    
     printf("\n\n\n\nPRINTANDO AS MAOS\n\n\n\n");
 
     //Distribuição das cartas para as mãos dos jogadores.
     distribuicao_cartas_jogadores(&jogadores, &baralho);
     
-    printf("\n\n\n\nPRINTANDO A PILHA\n\n\n\n");
+    CARTA mesa_cartas[5];
 
-    exibir_baralho(baralho);
+    PONTj pjAux = jogadores.inicio;
+
+    printf("\n\n\n\nPRINTANDO AS CARTAS DA MESA \n\n\n\n");
+
+    for (int k = 0; k < 5; k++){
+        mesa_cartas[k] = retirar_carta_pilha(&baralho);
+        exibir_carta(mesa_cartas[k]);
+    }
+
+    while (pjAux){
+
+        for (int k = 0; k < 5; k++)
+            pjAux->jogador.sequencia_aux[k] = mesa_cartas[k];
+        pjAux->jogador.sequencia_aux[5] = pjAux->jogador.mao[0];
+        pjAux->jogador.sequencia_aux[6] = pjAux->jogador.mao[1];
+
+        printf("\n\n\n\nPRINTANDO A SEQUENCIA AUXILIAR DO %s\n\n\n\n", pjAux->jogador.nome);
+
+        exibir_vetor_cartas(pjAux->jogador.sequencia_aux, 7);
+
+        pjAux->jogador.ranking = verificar_sequencia(pjAux->jogador.mao, mesa_cartas);
+
+        pjAux = pjAux->prox;
+    }
+
+
+
+    // printf("\n\n\n\nPRINTANDO A PILHA\n\n\n\n");
+
+    // exibir_baralho(baralho);
 
     // rankings = fopen("Rankings.txt", "a+");
-
 
     // if (rankings == NULL){
     //     printf ("Erro na abertura do arquivo!\n");
@@ -53,8 +85,6 @@ int main (){
     // else{
     //     printf ("Arquivo aberto com sucesso!\n");
     // }
-
-
 
     // sequencia_teste(sequencia_aux, cartas);
 

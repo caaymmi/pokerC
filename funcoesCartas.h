@@ -10,6 +10,6 @@ void embaralhar(CARTA *baralho);
 void preencher_baralho_cartas(PILHA* baralho, CARTA *cartas);
 void exibir_carta(CARTA carta);
 void exibir_baralho(PILHA baralho);
-void exibir_vetor_cartas(CARTA *baralho);
+void exibir_vetor_cartas(CARTA *baralho, int tamanho);
 
 #endif

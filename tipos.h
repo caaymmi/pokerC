@@ -33,9 +33,11 @@ typedef struct{
 typedef struct{
 
     char nome[MAX];
-    int id, banca, aposta;
+    int id, banca, aposta, ranking;
 
     CARTA mao[2];
+    CARTA sequencia_aux[7];
+
 
 } JOGADOR;
 
