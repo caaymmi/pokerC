@@ -14,7 +14,7 @@ Sejam verificados as sequências com os maiores valores possíveis.
 
 | Valor    | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 |
 |---------:|---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|
-| Aparições| 0 | 0 | 0 | 0 | 2 | 0 | 1 | 2 | 0 | 0 | 0  | 0  | 0  | 2  | 0  |
+| Aparições| 0 | 0 | 0 | 0 | **2** | 0 | 1 | **2** | 0 | 0 | 0  | 0  | 0  | **2**  | 0  |
 
 Com o **novo código** será reconhecido a **dupla de 13 e a dupla de 7**  
 Com o **código anterior** o **Par de Duplas** seria composto por uma **dupla de 4 e outra dupla de 7**
@@ -23,7 +23,7 @@ Com o **código anterior** o **Par de Duplas** seria composto por uma **dupla de
 
 | Valor    | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 |
 |---------:|---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|
-| Aparições| 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 3  | 0  | 0  | 0  | 0  |
+| Aparições| 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | **3** | **3**  | 0  | 0  | 0  | 0  |
 
 Com o **novo código** será reconhecido a **trinca de 10 e o par de 9.**  
 Com o **código anterior** o **Full House** seria composto por uma **trinca de 9 e o par de 10**.  
@@ -32,7 +32,7 @@ Com o **código anterior** o **Full House** seria composto por uma **trinca de 9
 
 | Valor     | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 |
 |----------:|---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|
-| Aparições | 0 | 0 | 0 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 0  | 0  | 0  | 0  | 0  |
+| Aparições | 0 | 0 | 0 | **1** | **1** | **1** | **1** | **1** | **1** | **1** | 0  | 0  | 0  | 0  | 0  |
 
 Com o **novo código** será reconhecido a **o straight de 5, 6, 7, 8, 9.**  
 Com o **código anterior** o **straight** seria composto por uma **sequência de 3, 4, 5, 6, 7.**

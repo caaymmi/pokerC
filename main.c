@@ -16,7 +16,6 @@ void sequencia_teste(CARTA *sequencia, CARTA *cartas);
 int main (){
 
     CARTA cartas[52];
-    CARTA sequencia_aux[7];
     LISTA jogadores;
     PILHA baralho;
     // FILE *rankings;
@@ -66,7 +65,7 @@ int main (){
 
         exibir_vetor_cartas(pjAux->jogador.sequencia_aux, 7);
 
-        pjAux->jogador.ranking = verificar_sequencia(pjAux->jogador.sequencia_aux);
+        pjAux->jogador.ranking = verificar_sequencia(pjAux->jogador.mao, mesa_cartas);
 
         pjAux = pjAux->prox;
     }
@@ -77,9 +76,7 @@ int main (){
 
     // exibir_baralho(baralho);
 
-
     // rankings = fopen("Rankings.txt", "a+");
-
 
     // if (rankings == NULL){
     //     printf ("Erro na abertura do arquivo!\n");
@@ -88,8 +85,6 @@ int main (){
     // else{
     //     printf ("Arquivo aberto com sucesso!\n");
     // }
-
-
 
     // sequencia_teste(sequencia_aux, cartas);
 
