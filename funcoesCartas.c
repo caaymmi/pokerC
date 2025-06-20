@@ -8,16 +8,14 @@
 void inicializar_cartas(CARTA* baralho_novo){
 
     int indice = 0;
+    
     // 1 -> Copas, 2 -> Espadas, 3 -> Ouros, 4 -> Espadas.
-    //Gostei muito desse uso de array, obrigado gpt, foi craque.
-    int naipes[] = {1, 2, 3, 4};
-
     //N de naipe, V de valor.
     for (int n = 0; n < 4; n++){
         for (int v = 1; v <= 13; v++){
 
             baralho_novo[indice].id = indice + 1;
-            baralho_novo[indice].naipe = naipes[n];
+            baralho_novo[indice].naipe = n + 1;
             baralho_novo[indice].valor = v;
             
             //Se for ás transforme-o no valor 14.
@@ -105,13 +103,10 @@ void exibir_baralho(PILHA baralho){
 
 }
 
-void exibir_vetor_cartas(CARTA *baralho){
+void exibir_vetor_cartas(CARTA *baralho, int tamanho){
 
-    for (int indice = 0; indice < 52; indice++){
-
+    for (int indice = 0; indice < tamanho; indice++)
         exibir_carta(baralho[indice]);
-
-    }
 
 }
 

@@ -4,7 +4,14 @@
 #include "tipos.h"
 #include "sequencias.h"
 
-int verificar_sequencia(CARTA *cartas){
+int verificar_sequencia(CARTA *cartas_jogador, CARTA *cartas_mesa){
+
+    //Atribui a essa sequência de cartas auxiliar as cartas da mesa e do jogador.
+    //Sendo as cinco primeiras as cartas da mesa e as duas últimas as cartas do jogador.    
+    CARTA cartas[7] = { cartas_mesa[0],
+        cartas_mesa[1], cartas_mesa[2],
+        cartas_mesa[3], cartas_mesa[4],
+        cartas_jogador[0], cartas_jogador[1]};
 
     //frequency_counter.
     int frequencias_naipe[5] = {0};
@@ -14,17 +21,17 @@ int verificar_sequencia(CARTA *cartas){
     //Perpassa a sequência de cartas na mão do jogador.
     for (int i = 0; i < 7; i++){
 
-        printf ("\nRODANDO O FREQUENCY COUNTER: %d\n\n", i);
+        // printf ("\nRODANDO O FREQUENCY COUNTER: %d\n\n", i);
 
         chave_valor = cartas[i].valor;
-        printf ("CHAVE_VALOR = %d\n", chave_valor);
+        // printf ("CHAVE_VALOR = %d\n", chave_valor);
         frequencias_valor[chave_valor]++;
-        printf ("FREQUENCIAS_VALOR %d = %d\n", chave_valor, frequencias_valor[chave_valor]);
+        // printf ("FREQUENCIAS_VALOR %d = %d\n", chave_valor, frequencias_valor[chave_valor]);
 
         chave_naipe = cartas[i].naipe;
-        printf ("CHAVE_NAIPE = %d\n", chave_naipe);
+        // printf ("CHAVE_NAIPE = %d\n", chave_naipe);
         frequencias_naipe[chave_naipe]++;
-        printf ("FREQUENCIAS_NAIPE %d = %d\n", chave_naipe, frequencias_naipe[chave_naipe]);
+        // printf ("FREQUENCIAS_NAIPE %d = %d\n", chave_naipe, frequencias_naipe[chave_naipe]);
 
 
     }
@@ -85,13 +92,15 @@ int verificar_sequencia(CARTA *cartas){
 
     }
 
+    printf ("\nA sua sequencia e uma carta alta.\n");
+    printf ("RANKING: TOP 10");
     return 10;
 
 }
 
 bool uma_dupla(int *frequencias_valores){
     
-    for (int i = 0; i < 15; i++)
+    for (int i = 14; i >= 0; i--)
         if (frequencias_valores[i] == 2)
             return true;
     
@@ -103,7 +112,7 @@ bool duas_duplas(int *frequencias_valores){
 
     int contador = 0;
 
-    for (int i = 0; i < 15; i++)
+    for (int i = 14; i >= 0; i--)
         if (frequencias_valores[i] == 2)
             contador++;
     
@@ -116,7 +125,7 @@ bool duas_duplas(int *frequencias_valores){
 
 bool trinca(int *frequencias_valores){
     
-    for (int i = 0; i < 15; i++)
+    for (int i = 14; i >= 0; i--)
         if (frequencias_valores[i] == 3)
             return true;
     
@@ -126,7 +135,7 @@ bool trinca(int *frequencias_valores){
 
 bool quadra(int *frequencias_valores){
         
-    for (int i = 0; i < 15; i++)
+    for (int i = 14; i >= 0; i--)
         if (frequencias_valores[i] == 4)
             return true;
     
@@ -136,7 +145,22 @@ bool quadra(int *frequencias_valores){
 
 bool full_house(int *frequencias_valores){
 
-    return uma_dupla(frequencias_valores) && trinca(frequencias_valores);
+    int cont_trincas = 0;
+    int cont_duplas = 0;
+
+    for (int i = 14; i >= 0; i--){
+        if (frequencias_valores[i] == 3)
+            cont_trincas++;
+        else if (frequencias_valores[i] == 2)
+            cont_duplas++;
+
+        if (cont_trincas == 1 && cont_duplas == 1)
+            return true;
+        else if (cont_trincas == 2)
+            return true;
+    }
+
+    return false;
 
 }
 
@@ -152,17 +176,21 @@ bool flush(int *frequencias_naipes){
 
 bool straight(int *frequencias_valores){
 
-    int verificador = 0;
+    int consecutivos = 0;
 
-    for (int i = 0; i < 15; i++){
+    //Parte do fim do vetor de frequências para que
+    //Assim que encontrar o maior straight possível o retorn.
+    for (int i = 14; i >= 2; i--){
 
-        if (frequencias_valores[i] >= 1 && frequencias_valores[i+1] >= 1){
-            verificador++;
-            if (verificador >= 4)
+        //Verifica se o valor atual aparece na sequência.
+        //Caso não apareça, reseta o contador de números consecutivos.
+        if (frequencias_valores[i] > 0){
+            consecutivos++;
+            if (consecutivos == 5)
                 return true;
         }
         else{
-            verificador = 0;
+            consecutivos = 0;
         }
 
     }
