@@ -4,7 +4,14 @@
 #include "tipos.h"
 #include "sequencias.h"
 
-int verificar_sequencia(CARTA *cartas){
+int verificar_sequencia(CARTA *cartas_jogador, CARTA *cartas_mesa){
+
+    //Atribui a essa sequência de cartas auxiliar as cartas da mesa e do jogador.
+    //Sendo as cinco primeiras as cartas da mesa e as duas últimas as cartas do jogador.    
+    CARTA cartas[7] = { cartas_mesa[0],
+        cartas_mesa[1], cartas_mesa[2],
+        cartas_mesa[3], cartas_mesa[4],
+        cartas_jogador[0], cartas_jogador[1]};
 
     //frequency_counter.
     int frequencias_naipe[5] = {0};
@@ -138,7 +145,22 @@ bool quadra(int *frequencias_valores){
 
 bool full_house(int *frequencias_valores){
 
-    return uma_dupla(frequencias_valores) && trinca(frequencias_valores);
+    int cont_trincas = 0;
+    int cont_duplas = 0;
+
+    for (int i = 14; i >= 0; i--){
+        if (frequencias_valores[i] == 3)
+            cont_trincas++;
+        else if (frequencias_valores[i] == 2)
+            cont_duplas++;
+
+        if (cont_trincas == 1 && cont_duplas == 1)
+            return true;
+        else if (cont_trincas == 2)
+            return true;
+    }
+
+    return false;
 
 }
 
