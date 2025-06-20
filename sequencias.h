@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include "tipos.h"
 
-int verificar_sequencia(CARTA *cartas);
+int verificar_sequencia(CARTA *cartas_jogador, CARTA *mesa_cartas);
 
 //Verificar funcionalidade destes com a última implementação feita
 //Implementação com dois vetores de frequências, um pra naipe outro pra valores.
