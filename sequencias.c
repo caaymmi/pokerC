@@ -13,11 +13,8 @@ FREQ_COUNTER frequency_counter(CARTA *cartas_jogador, CARTA *cartas_mesa){
     memset(frequencias.valores, 0, sizeof(frequencias.valores));
     memset(frequencias.naipes, 0, sizeof(frequencias.naipes));
 
-    for (int i = 0; i < 5; i++) 
-        frequencias.sequencia_aux[i] = cartas_mesa[i];
-
-    for (int i = 0; i < 2; i++)
-        frequencias.sequencia_aux[5 + i] = cartas_jogador[i];
+    for (int i = 0; i < 5; i++) frequencias.sequencia_aux[i] = cartas_mesa[i];
+    for (int i = 0; i < 2; i++) frequencias.sequencia_aux[5 + i] = cartas_jogador[i];
     
     for (int i = 0; i < 7; i++){
         chave_valor = frequencias.sequencia_aux[i].valor;
@@ -140,31 +137,69 @@ bool uma_dupla(int *frequencias_valores){
     return false;
 
 }
-int dupla(FREQ_COUNTER *freq){
+
+int dupla(FREQ_COUNTER *freq, int *valores_repetidos){
 
     int cont_duplas = 0;
-    int valores_repetidos[3] = {0};
 
-    for (int i = 14; i >= 0; i--){
-        
+    //Itera todo o array de frequências de valores.
+    for (int i = 14; i >= 2; i--){
+        //Se houver alguma carta que aparece duas vezes.
         if (freq->valores[i] == 2){
             valores_repetidos[cont_duplas] = i;
             cont_duplas++;
         }
-
     }
-
-    for (int i = 7; i >= 0; i--){
-        if (valores_repetidos[0] == freq->sequencia_aux[i].valor){
-            
-        }
-    }
-
 
     return cont_duplas;
 
 }
 
+int trinca(FREQ_COUNTER *freq, int *valores_repetidos){
+
+    int cont_trincas = 0;
+
+    for (int i = 14; i >= 2; i--){
+
+        if (freq->valores[i] == 3){
+            valores_repetidos[cont_trincas] = i;
+            cont_trincas++;
+        }
+
+    }
+
+    return cont_trincas;
+
+}
+
+int quadra(FREQ_COUNTER *freq, int *valores_repetidos){
+
+    int cont_quadras = 0;
+
+    for (int i = 14; i >= 2; i--){
+
+        if (freq->valores[i] == 4){
+            *valores_repetidos = i;
+            cont_quadras++;
+        }
+
+    }
+
+    return cont_quadras;
+
+}
+
+int full_house(FREQ_COUNTER *freq, int *valores_repetidos){
+
+    int cont_full_house = 0;
+
+    if ((trinca(freq, valores_repetidos) == 2) || 
+        (trinca(freq, valores_repetidos) == 1 && dupla(freq, valores_repetidos) == 1))
+        return 1;
+
+    return 0;
+
+}
 
 bool duas_duplas(int *frequencias_valores){
 
