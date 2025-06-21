@@ -1,5 +1,18 @@
 # Acrescentar
 
+### Problema dia 21 de Junho de 2025
+
+Verificar quais são as sequências possíveis não é um problema, contudo o problema é retornar quais são os valores repetido de forma eficiente. Exemplo:
+
+| Valor    | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 |
+|---------:|---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|
+| Aparições| 0 | 0 | 1 | 0 | 1 | 0 | 1 | **2** | 0 | 0 | 0  | 0  | 0  | **2**  | 0  |
+
+O problema aqui é ter uma forma de retornar **o número 14 (O Ás)** e retornar **o número 7**. 
+Com o intuito de tê-los para reconhecer as cartas na sequência auxiliar para transferir para a melhor sequência possível.
+
+### Refatoração de código
+
 Refatorar as sequências e talvez colocar todas elas com contadores do tipo:
 **dupla(frequencia_valor[])** passará a retornar um inteiro que indicará quantoas
 duplas existem naquela sequência, sendo uma duas ou três. O mesmo serve para uma ou duas trincas.
