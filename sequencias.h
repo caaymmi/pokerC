@@ -6,7 +6,7 @@
 
 FREQ_COUNTER frequency_counter(CARTA *cartas_jogador, CARTA *cartas_mesa);
 int verificar_sequencia(CARTA *cartas_jogador, CARTA *mesa_cartas);
-CARTA* melhor_sequencia(FREQ_COUNTER *freq);
+void melhor_sequencia(FREQ_COUNTER *freq);
 
 int dupla(FREQ_COUNTER *freq);
 int trinca(FREQ_COUNTER *freq);

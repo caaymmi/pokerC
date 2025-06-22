@@ -34,17 +34,23 @@ int verificar_sequencia(CARTA *cartas_jogador, CARTA *cartas_mesa){
     freq = frequency_counter(cartas_jogador, cartas_mesa);
 
     if (dupla(&freq) == 1){
-        printf ("uma dupla");
+        printf ("\n\numa dupla\n\n");
         
+
+        printf ("\n\n\n\nEXIBINDO OS VALORES DA SEQUENCIA POSSIVEL:\n\n\n\n");
+        for (int i = 15; i <= 19; i++)
+            printf("%d\t", freq.valores[i]);
         //ultra teste
-        exibir_vetor_cartas(melhor_sequencia(freq.sequencia_aux), 5);
+        melhor_sequencia(&freq);
 
         return 9;
     } else if (dupla(&freq) == 2){
-        printf ("duas duplas");
+        printf ("\n\nduas duplas\n\n");
 
+        for (int i = 15; i <= 19; i++)
+            printf("%d\t", freq.valores[i]);
         //ultra teste
-        exibir_vetor_cartas(melhor_sequencia(freq.sequencia_aux), 5);
+        melhor_sequencia(&freq);
 
         return 8;
     }
@@ -54,26 +60,16 @@ int verificar_sequencia(CARTA *cartas_jogador, CARTA *cartas_mesa){
 
 }
 
-CARTA* melhor_sequencia(FREQ_COUNTER *freq){
+void melhor_sequencia(FREQ_COUNTER *freq) {
 
-    CARTA sequencia[5];
+    for (int j = 0; j < 5; j++)
+        for (int i = 0; i < 7; i++)
+            if (freq->sequencia_aux[i].valor == freq->valores[15 + j])
+                freq->melhor_sequencia[j] = freq->sequencia_aux[i];
 
-    for (int j = 0; j < 5; j++){
-
-        for (int i = 0; i < 7; i++){
-            if (freq->sequencia_aux[i].valor == freq->valores[15 + j]){
-                sequencia[j] = freq->sequencia_aux[i];
-                j++;
-            }
-        }
-
-    }
-
-    //ultra teste.
-    exibir_vetor_cartas(sequencia, 5);
-
-    return sequencia;
-
+    printf ("\n\n\n\nEXIBINDO A MELHOR SEQUENCIA POSSIVEL:\n\n\n\n");
+    // ultra teste.
+    exibir_vetor_cartas(freq->melhor_sequencia, 5);
 }
 
 int dupla(FREQ_COUNTER *freq){
@@ -94,8 +90,8 @@ int dupla(FREQ_COUNTER *freq){
         }
         //Se houver alguma carta que aparece duas vezes.
         else if (freq->valores[i] == 2){
-            freq->valores[15 + cont_duplas] = i;
-            freq->valores[16 + cont_duplas] = i;
+            freq->valores[15 + (2 * cont_duplas)] = i;
+            freq->valores[16 + (2 * cont_duplas)] = i;
             cont_duplas++;
         }
 
