@@ -37,14 +37,14 @@ int verificar_sequencia(CARTA *cartas_jogador, CARTA *cartas_mesa){
         printf ("uma dupla");
         
         //ultra teste
-        exibir_vetor_cartas(melhor_sequencia(freq.sequencia_aux));
+        exibir_vetor_cartas(melhor_sequencia(freq.sequencia_aux), 5);
 
         return 9;
     } else if (dupla(&freq) == 2){
         printf ("duas duplas");
 
         //ultra teste
-        exibir_vetor_cartas(melhor_sequencia(freq.sequencia_aux));
+        exibir_vetor_cartas(melhor_sequencia(freq.sequencia_aux), 5);
 
         return 8;
     }
