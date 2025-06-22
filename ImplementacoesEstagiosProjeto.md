@@ -28,7 +28,8 @@ void melhor_sequencia(FREQ_COUNTER *freq) {
 }
 ```
 
-O primeiro loop ancora os valores da sequência e o segundo percorre as cartas disponíveis para o jogador. Ele analisa se a carta tem o mesmo valor que está presente na sequência e se a carta ainda não foi utilizada, essa segunda parte é muito importante pois previne que uma mesma carta seja adicionada duas vezes. 
+O primeiro loop ancora os valores da sequência e o segundo percorre as cartas disponíveis para o jogador.  
+Ele analisa se a carta tem o mesmo valor que está presente na sequência e se a carta ainda não foi utilizada, essa segunda parte é muito importante pois previne que uma mesma carta seja adicionada duas vezes. 
 
 A variável `carta_usada` foi essencial.
 
