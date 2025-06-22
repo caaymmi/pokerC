@@ -1,3 +1,36 @@
+# 22 de junho de 2025
+
+Retorno da melhor sequência possível de um jogador com um par de cartas ou dois pares de cartas realizada. 
+Através do código abaixo:
+
+```c
+void melhor_sequencia(FREQ_COUNTER *freq) {
+
+    bool carta_usada[7] = {false};
+
+    for (int j = 0; j < 5; j++){
+
+        for (int i = 0; i < 7; i++){
+            
+            if (!carta_usada[i] &&
+                freq->sequencia_aux[i].valor == freq->valores[15 + j]){
+                
+                freq->melhor_sequencia[j] = freq->sequencia_aux[i];
+                carta_usada[i] = true;
+                break;
+                
+            }
+            
+        }
+
+    }
+}
+```
+
+O primeiro loop ancora os valores da sequência e o segundo percorre as cartas disponíveis para o jogador. Ele analisa se a carta tem o mesmo valor que está presente na sequência e se a carta ainda não foi utilizada, essa segunda parte é muito importante pois previne que uma mesma carta seja adicionada duas vezes. 
+
+A variável `carta_usada` foi essencial.
+
 # 21 de junho de 2025
 
 ## Implementação pelo armazenamento dos valores das cartas da melhor sequência possível de um jogador
