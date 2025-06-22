@@ -1,3 +1,48 @@
+# 21 de junho de 2025
+
+## Implementação pelo armazenamento dos valores das cartas da melhor sequência possível de um jogador
+
+Através de uma possível _"gambiarra",_ os valores das melhores cartas foram armazenados nas últimas 5 posições do contador de frequência de valores
+por meio de frequency_counter.valores[15~19] é onde se encontram os melhores valores disponíveis. No caso atual, em que inicialmente foram implementadas
+as duplas temos o ou os valores duplicados ocupando em casos de:
+
+- **Uma dupla: `frequency_counter.valores[15] e [16]`**
+- **Duas duplas: `frequency_counter.valores[17] e [18]`**
+
+E os últimos índices contém os maiores valores disponíveis na sequência do jogador.
+
+## Exemplo: 
+
+### 1. Duas duplas
+
+| Valor    | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 |
+|---------:|---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|
+| Aparições| 0 | 0 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0  | 0  | **2**  | 0  | **2**  |
+
+### 2. Uma dupla
+
+| Valor    | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 |
+|---------:|---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|
+| Aparições| 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0  | 0  | **2**  | 1  | 1 |
+
+**Se rodarmos:**
+
+```c
+    for (int i = 15; i < 20; i++){
+        printf("%d  ", frequency_counter_exemplo1.valores[i]);
+    }
+
+    // Imprimirá:
+    14  14  12  12  13
+
+    for (int i = 15; i < 20; i++){
+        printf("%d  ", frequency_counter_exemplo2.valores[i]);
+    }
+
+    // Imprimirá:
+    12  12  9  13  14
+```
+
 # 18 de junho de 2025
 
 ## Refatoração do código das sequências
