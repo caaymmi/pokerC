@@ -1,6 +1,6 @@
 # Implementações a Fazer
 
-## Dia 21 de Junho de 2025
+## 21 de Junho de 2025
 
 ### Problema
 
@@ -13,7 +13,7 @@ Verificar quais são as sequências possíveis não é um problema, contudo o pr
 O problema aqui é ter uma forma de retornar **o número 14 (O Ás)** e retornar **o número 7**. 
 Com o intuito de tê-los para reconhecer as cartas na sequência auxiliar para transferir para a melhor sequência possível.
 
-## Dia 20 de junho de 2025
+## 20 de junho de 2025
 
 ### Sequencias.c
 
@@ -22,7 +22,7 @@ Sendo assim, analisando o código principalmente o início dele com o **for** e 
 Esse número deve ser encontrado antes desse setor do código ou seja retornado pela verificação de sequência. Para que não hajam um loop dentro de outro. 
 
 
-## Dia 19 de junho de 2025
+## 19 de junho de 2025
 
 ### Refatoração de código
 

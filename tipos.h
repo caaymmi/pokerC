@@ -64,7 +64,7 @@ typedef struct {
 
     CARTA sequencia_aux[7];
     CARTA melhor_sequencia[5];
-    int valores[15];
+    int valores[20];
     int naipes[5];
 
 }FREQ_COUNTER;
