@@ -62,10 +62,24 @@ int verificar_sequencia(CARTA *cartas_jogador, CARTA *cartas_mesa){
 
 void melhor_sequencia(FREQ_COUNTER *freq) {
 
-    for (int j = 0; j < 5; j++)
-        for (int i = 0; i < 7; i++)
-            if (freq->sequencia_aux[i].valor == freq->valores[15 + j])
+    bool carta_usada[7] = {false};
+
+    for (int j = 0; j < 5; j++){
+
+        for (int i = 0; i < 7; i++){
+            
+            if (!carta_usada[i] &&
+                freq->sequencia_aux[i].valor == freq->valores[15 + j]){
+                
                 freq->melhor_sequencia[j] = freq->sequencia_aux[i];
+                carta_usada[i] = true;
+                break;
+                
+            }
+            
+        }
+
+    }
 
     printf ("\n\n\n\nEXIBINDO A MELHOR SEQUENCIA POSSIVEL:\n\n\n\n");
     // ultra teste.
