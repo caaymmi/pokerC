@@ -1,5 +1,72 @@
 # Implementações a Fazer
 
+## 22 de Junho de 2025
+
+### Problema
+
+A função de retornar a melhor sequência possível tem os valores corretos, contudo está passando cartas literalmente repetidas.
+
+```c
+for (int j = 0; j < 5; j++)
+        for (int i = 0; i < 7; i++)
+            if (freq->sequencia_aux[i].valor == freq->valores[15 + j])
+                freq->melhor_sequencia[j] = freq->sequencia_aux[i];
+```
+
+O primeiro loop ancora o valor e o segundo loop percorre a sequência para encontrar a carta que tem o valor correspondente. Contudo, como se trata de pares de cartas, existem duas cartas com o mesmo valor, então o loop percorre a sequência e encontra a primeira carta com o valor correspondente, mas não verifica se essa carta já foi adicionada à melhor sequência.
+
+```c
+PRINTANDO A SEQUENCIA AUXILIAR DO LUCCAS
+
+CARTA de ID: 12
+Rainha de Copas
+
+CARTA de ID: 48
+Nove de Paus
+
+CARTA de ID: 15
+Dois de Espadas
+
+CARTA de ID: 51
+Rainha de Paus
+
+CARTA de ID: 8
+Oito de Copas
+
+CARTA de ID: 42
+Tres de Paus
+
+CARTA de ID: 49
+Dez de Paus
+
+uma dupla
+
+EXIBINDO OS VALORES DA SEQUENCIA POSSIVEL:
+
+12      12      8       9       10
+
+EXIBINDO A MELHOR SEQUENCIA POSSIVEL:
+
+CARTA de ID: 51
+Rainha de Paus
+
+CARTA de ID: 51
+Rainha de Paus
+
+CARTA de ID: 8
+Oito de Copas
+
+CARTA de ID: 48
+Nove de Paus
+
+CARTA de ID: 49
+Dez de Paus
+```
+
+Nota-se que o **Rainha de Paus** se repete, enquanto que deveria ser a **Rainha de Paus** e a **Rainha de Copas**, indicada lá em cima no começo do bloco de código. 
+
+Para resolver isso, é necessário adicionar uma verificação para garantir que a carta não foi adicionada.
+
 ## 21 de Junho de 2025
 
 ### Problema
