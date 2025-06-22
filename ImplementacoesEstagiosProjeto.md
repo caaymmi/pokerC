@@ -1,7 +1,8 @@
 # 22 de junho de 2025
 
-Retorno da melhor sequência possível de um jogador com um par de cartas ou dois pares de cartas realizada. 
-Através do código abaixo:
+## Retorno da melhor sequência possível de um jogador com um par de cartas ou dois pares de cartas realizada. 
+
+### Segue o código da implementação:
 
 ```c
 void melhor_sequencia(FREQ_COUNTER *freq) {
