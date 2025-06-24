@@ -1,0 +1,163 @@
+Entre com o total de jogadores: 2
+
+Entre com o seu nome: jorge
+Entre com a sua banca: 400
+
+Entre com o seu nome: wilson
+Entre com a sua banca: 200
+
+
+JOGADOR:        jorge
+BANCA:          400 FICHAS
+
+JOGADOR:        wilson
+BANCA:          200 FICHAS
+
+
+
+
+
+PRINTANDO AS CARTAS DA MESA 
+
+
+
+
+CARTA de ID: 43
+Quatro de Paus
+
+CARTA de ID: 9
+Nove de Copas
+
+CARTA de ID: 45
+Seis de Paus
+
+CARTA de ID: 11
+Valete de Copas
+
+CARTA de ID: 5
+Cinco de Copas
+
+
+
+
+PRINTANDO AS MAOS
+
+
+
+
+SEGUE A MAO DO jorge
+CARTA de ID: 34
+Oito de Ouros
+
+CARTA de ID: 2
+Dois de Copas
+
+SEGUE A MAO DO wilson
+CARTA de ID: 31
+Cinco de Ouros
+
+CARTA de ID: 30
+Quatro de Ouros
+
+
+
+
+PRINTANDO A SEQUENCIA AUXILIAR DO jorge
+
+CARTA de ID: 43
+Quatro de Paus
+
+CARTA de ID: 9
+Nove de Copas
+
+CARTA de ID: 45
+Seis de Paus
+
+CARTA de ID: 11
+Valete de Copas
+
+CARTA de ID: 5
+Cinco de Copas
+
+CARTA de ID: 34
+Oito de Ouros
+
+CARTA de ID: 2
+Dois de Copas
+
+uma dupla
+
+EXIBINDO OS VALORES DA SEQUENCIA POSSIVEL:
+
+13      13      8       9       11
+
+EXIBINDO A MELHOR SEQUENCIA POSSIVEL:
+
+CARTA de ID: 6420836
+
+CARTA de ID: 0
+
+CARTA de ID: 34
+Oito de Ouros
+
+CARTA de ID: 9
+Nove de Copas
+
+CARTA de ID: 11
+Valete de Copas
+
+
+
+
+PRINTANDO A SEQUENCIA AUXILIAR DO wilson
+
+
+
+
+CARTA de ID: 43
+Quatro de Paus
+
+CARTA de ID: 9
+Nove de Copas
+
+CARTA de ID: 45
+Seis de Paus
+
+CARTA de ID: 11
+Valete de Copas
+
+CARTA de ID: 5
+Cinco de Copas
+
+CARTA de ID: 31
+Cinco de Ouros
+
+CARTA de ID: 30
+Quatro de Ouros
+
+
+duas duplas
+
+5       5       4       4       11
+
+
+
+EXIBINDO A MELHOR SEQUENCIA POSSIVEL:
+
+
+
+
+CARTA de ID: 5
+Cinco de Copas
+
+CARTA de ID: 31
+Cinco de Ouros
+
+CARTA de ID: 43
+Quatro de Paus
+
+CARTA de ID: 30
+Quatro de Ouros
+
+CARTA de ID: 11
+Valete de Copas

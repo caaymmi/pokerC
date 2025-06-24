@@ -14,9 +14,14 @@ FREQ_COUNTER frequency_counter(CARTA *cartas_jogador, CARTA *cartas_mesa){
     memset(frequencias.valores, 0, sizeof(frequencias.valores));
     memset(frequencias.naipes, 0, sizeof(frequencias.naipes));
 
-    for (int i = 0; i < 5; i++) frequencias.sequencia_aux[i] = cartas_mesa[i];
-    for (int i = 0; i < 2; i++) frequencias.sequencia_aux[5 + i] = cartas_jogador[i];
-    
+    for (int i = 0; i < 5; i++){
+        frequencias.sequencia_aux[i] = cartas_mesa[i];
+        frequencias.melhor_sequencia[i].id = -1;
+    }
+    for (int i = 0; i < 2; i++){
+        frequencias.sequencia_aux[5 + i] = cartas_jogador[i];
+    }
+
     for (int i = 0; i < 7; i++){
         chave_valor = frequencias.sequencia_aux[i].valor;
         chave_naipe = frequencias.sequencia_aux[i].naipe;
@@ -33,9 +38,32 @@ int verificar_sequencia(CARTA *cartas_jogador, CARTA *cartas_mesa){
     FREQ_COUNTER freq;
     freq = frequency_counter(cartas_jogador, cartas_mesa);
 
-    if (dupla(&freq) == 1){
-        printf ("\n\numa dupla\n\n");
+    if (quadra(&freq) == 1){
+        printf ("\n\numa quadra\n\n");
+
+        printf ("\n\n\n\nEXIBINDO OS VALORES DA SEQUENCIA POSSIVEL:\n\n\n\n");
+        for (int i = 15; i <= 19; i++)
+            printf("%d\t", freq.valores[i]);
         
+            //ultra teste
+        melhor_sequencia(&freq);
+
+        return 4;
+    }
+    else if (trinca(&freq) == 1){
+        printf ("\n\numa trinca\n\n");
+
+        printf ("\n\n\n\nEXIBINDO OS VALORES DA SEQUENCIA POSSIVEL:\n\n\n\n");
+        for (int i = 15; i <= 19; i++)
+            printf("%d\t", freq.valores[i]);
+        
+            //ultra teste
+        melhor_sequencia(&freq);
+
+        return 7;
+    }
+    else if (dupla(&freq) == 1){
+        printf ("\n\numa dupla\n\n");
 
         printf ("\n\n\n\nEXIBINDO OS VALORES DA SEQUENCIA POSSIVEL:\n\n\n\n");
         for (int i = 15; i <= 19; i++)
@@ -44,6 +72,7 @@ int verificar_sequencia(CARTA *cartas_jogador, CARTA *cartas_mesa){
         melhor_sequencia(&freq);
 
         return 9;
+
     } else if (dupla(&freq) == 2){
         printf ("\n\nduas duplas\n\n");
 
@@ -91,6 +120,13 @@ int dupla(FREQ_COUNTER *freq){
     int cont_duplas = 0;
     int j = 0;
 
+    printf ("\n\n\n\nTESTE DE SANIDADE:\n\n\n\n");
+    printf ("JA FOI COMPUTADO NA melhor sequencia\n");
+    printf ("PRESENTE AO FIM DA FREQ COUNTER DE VALORES\n");
+    for (int i = 19; i >= 15; i--){
+        printf ("A CARTA DE VALOR: %d\n", freq->valores[i]);
+    }
+
     //Itera todo o array de frequências de valores.
     for (int i = 14; i >= 2; i--){
 
@@ -100,6 +136,7 @@ int dupla(FREQ_COUNTER *freq){
             if (freq->valores[19 - j] == 0){
                 freq->valores[19 - j] = i;
                 j++;
+
             }
         }
         //Se houver alguma carta que aparece duas vezes.
@@ -118,11 +155,24 @@ int dupla(FREQ_COUNTER *freq){
 int trinca(FREQ_COUNTER *freq){
 
     int cont_trincas = 0;
+    int j = 0;
 
+    //Itera todo o array de frequências de valores.
     for (int i = 14; i >= 2; i--){
 
-        if (freq->valores[i] == 3){
-            freq->valores[15 + cont_trincas] = i;
+        //Armazena os maiores valores da sequência auxiliar,
+        //Para colocar na melhor sequência.
+        if (freq->valores[i] == 1){
+            if (freq->valores[19 - j] == 0){
+                freq->valores[19 - j] = i;
+                j++;
+            }
+        }
+        //Se houver alguma carta que aparece três vezes.
+        else if (freq->valores[i] == 3){
+            freq->valores[15 + (3 * cont_trincas)] = i;
+            freq->valores[16 + (3 * cont_trincas)] = i;
+            freq->valores[17 + (3 * cont_trincas)] = i;
             cont_trincas++;
         }
 
@@ -135,15 +185,26 @@ int trinca(FREQ_COUNTER *freq){
 int quadra(FREQ_COUNTER *freq){
 
     int cont_quadras = 0;
+    int j = 0;
 
+    //Itera todo o array de frequências de valores.
     for (int i = 14; i >= 2; i--){
 
-        if (freq->valores[i] == 4){
-            
-            //Local no array de valores que guardará o valor repetido.
-            freq->valores[15 + cont_quadras] = i;
+        //Armazena os maiores valores da sequência auxiliar,
+        //Para colocar na melhor sequência.
+        if (freq->valores[i] == 1){
+            if (freq->valores[19 - j] == 0){
+                freq->valores[19 - j] = i;
+                j++;
+            }
+        }
+        //Se houver alguma carta que aparece quatro vezes.
+        else if (freq->valores[i] == 4){
+            freq->valores[15] = i;
+            freq->valores[16] = i;
+            freq->valores[17] = i;
+            freq->valores[18] = i;
             cont_quadras++;
-
         }
 
     }

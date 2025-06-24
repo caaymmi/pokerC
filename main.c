@@ -32,27 +32,34 @@ int main (){
         inicializar_cartas(cartas);
         srand(time(NULL));
         embaralhar(cartas);
-        // exibir_vetor_cartas(cartas, 52);
         inicializar_pilha(&baralho);
         preencher_baralho_cartas(&baralho, cartas);
 
     }
-    
-    printf("\n\n\n\nPRINTANDO AS MAOS\n\n\n\n");
 
-    //Distribuição das cartas para as mãos dos jogadores.
-    distribuicao_cartas_jogadores(&jogadores, &baralho);
-    
     CARTA mesa_cartas[5];
-
-    PONTj pjAux = jogadores.inicio;
-
+    
     printf("\n\n\n\nPRINTANDO AS CARTAS DA MESA \n\n\n\n");
-
+    
+    CARTA cartas_pra_teste[52];
+    inicializar_cartas(cartas_pra_teste);
+    mesa_cartas[0] = cartas_pra_teste[1];
+    mesa_cartas[1] = cartas_pra_teste[3];
+    mesa_cartas[2] = cartas_pra_teste[4];
+    mesa_cartas[3] = cartas_pra_teste[5];
+    mesa_cartas[4] = cartas_pra_teste[7];
+    
     for (int k = 0; k < 5; k++){
-        mesa_cartas[k] = retirar_carta_pilha(&baralho);
+        // mesa_cartas[k] = retirar_carta_pilha(&baralho);
         exibir_carta(mesa_cartas[k]);
     }
+    
+    printf("\n\n\n\nPRINTANDO AS MAOS\n\n\n\n");
+    
+    //Distribuição das cartas para as mãos dos jogadores.
+    distribuicao_cartas_jogadores(&jogadores, &baralho);
+
+    PONTj pjAux = jogadores.inicio;
 
     while (pjAux){
 
