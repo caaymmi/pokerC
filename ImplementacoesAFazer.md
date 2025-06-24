@@ -72,7 +72,150 @@ else if (dupla(&freq) == 1){
     return 8;
 }
 ```
-O problema ocorre pois estamos tratando com ponteiros e passagens por referências, portanto em cada uma dessas verificações o vetor `freq->valores` é sobrescrito com os valores das cartas que estão sendo verificadas, mesmo que sejam as mesmas.
+O problema ocorre pois estamos tratando com ponteiros e passagens por referências, portanto em cada uma dessas verificações o vetor `freq->valores` é sobrescrito com os valores das cartas que estão sendo verificadas, mesmo que sejam as mesmas .
+
+```c
+int quadra(FREQ_COUNTER *freq){
+
+    int cont_quadras = 0;
+    int j = 0;
+
+    //Itera todo o array de frequências de valores.
+    for (int i = 14; i >= 2; i--){
+
+        //Armazena os maiores valores da sequência auxiliar,
+        //Para colocar na melhor sequência.
+        if (freq->valores[i] == 1){
+            if (freq->valores[19 - j] == 0){
+                freq->valores[19 - j] = i;
+                j++;
+            }
+        }
+        //Se houver alguma carta que aparece quatro vezes.
+        else if (freq->valores[i] == 4){
+            freq->valores[15] = i;
+            freq->valores[16] = i;
+            freq->valores[17] = i;
+            freq->valores[18] = i;
+            cont_quadras++;
+        }
+
+    }
+
+    return cont_quadras;
+
+}
+```
+
+Esse código o vetor de valores na memória ainda que a função retorne zero, o vetor de valores já foi sobrescrito com os valores das cartas que estão sendo verificadas. E isso se repete nas funções abaixo, `trinca` e `dupla`. Podemos realizar um teste de sanidade para verificar se isso de fato está acontecendo.
+
+```c
+PRINTANDO A SEQUENCIA AUXILIAR DO wilson
+
+CARTA de ID: 41
+Dois de Paus
+
+CARTA de ID: 37
+Valete de Ouros
+
+CARTA de ID: 43
+Quatro de Paus
+
+CARTA de ID: 19
+Seis de Espadas
+
+CARTA de ID: 16
+Tres de Espadas
+
+CARTA de ID: 18
+Cinco de Espadas
+
+CARTA de ID: 11
+Valete de Copas
+
+TESTE DE SANIDADE:
+
+JA FOI COMPUTADO NA melhor sequencia
+PRESENTE AO FIM DA FREQ COUNTER DE VALORES
+A CARTA DE VALOR: 6
+A CARTA DE VALOR: 5
+A CARTA DE VALOR: 4
+A CARTA DE VALOR: 3
+A CARTA DE VALOR: 2
+
+uma dupla
+
+EXIBINDO OS VALORES DA SEQUENCIA POSSIVEL:
+
+11      11      4       5       6
+
+EXIBINDO A MELHOR SEQUENCIA POSSIVEL:
+
+CARTA de ID: 37
+Valete de Ouros
+
+CARTA de ID: 11
+Valete de Copas
+
+CARTA de ID: 43
+Quatro de Paus
+
+CARTA de ID: 18
+Cinco de Espadas
+
+CARTA de ID: 19
+Seis de Espadas
+```
+
+Percebe-se que ao fim do vetor de valores da frequência encontramos os valores 6, 5, 4, 3 e 2, que foram analisados nas funções `quadra`, `trinca` anteriormente.  
+
+Saída acima reproduzida pelo bloco de código abaixo.
+
+```c
+printf ("\n\n\n\nTESTE DE SANIDADE:\n\n\n\n");
+printf ("JA FOI COMPUTADO NA melhor sequencia\n");
+printf ("PRESENTE AO FIM DA FREQ COUNTER DE VALORES\n");
+for (int i = 19; i >= 15; i--){
+    printf ("A CARTA DE VALOR: %d\n", freq->valores[i]);
+}
+```
+
+Do **índice 19 ao 15** deveria se conter apenas os valores das cartas que estão na melhor sequência. Contudo, quando não há sequência nenhuma, dupla, trinca ou quadra, esses valores se aglutinam até o **índice 13**, que é o que conta quantos Reis existem na sequência auxiliar. Isso se deve ao bloco de código abaixo:
+
+```c
+for (int i = 14; i >= 2; i--){
+    if (freq->valores[i] == 1){
+        if (freq->valores[19 - j] == 0){
+            //Se J = 6; 19 - 6 = 13
+            freq->valores[19 - j] = i; 
+            j++;
+        }
+    }
+}
+```
+Não há condição de parada de **J**.  
+Então se houverem 7 cartas de valores diferentes o J chegará a 6.  
+Isso fará com que a atribuição do valor para melhor sequência passe a ser considerado como a quantidade de reis que existem.
+
+No primeiro exemplo dado a tabela de valores ficava assim:
+
+| Valor    | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 |
+|---------:|---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|
+| Aparições| 0 | 0 | **1** | 0 | **1** | **1** | **1** | 0 | **1** | **1** | 0  | **1**  | 0  | 0  | 0  |
+
+Na primeira verificação da sequência auxiliar na função `quadra`, os índices 19 a 15 ficavam assim:
+
+| Índice    | 13 | 14 | 15 | 16 | 17 | 18 | 19 |
+|----------:|----|----|----|----|----|----|----|
+| Valor     | **2**  | **4**  | **5**  | **6**  |  **8** |  **9** | **11** |
+
+E isso faz com que o resto do código interprete que:
+- Houvessem duas cartas de valor 13, dois Reis;
+- Houvessem quatro cartas de valor 14, quatro Ás;
+
+O que afeta a função `dupla`e afetaria a função `quadra` se ela fosse chamada posteriormente, pois fará com que se reconheça uma dupla e/ou uma quadra onde não há.
+
+Dessa forma, a solução para isso é adicionar uma condição de parada para o **J**, um `break` ou fazer com que não haja essa sobrescrita.
 
 ## 22 de Junho de 2025
 

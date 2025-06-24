@@ -1,3 +1,33 @@
+# 24 de junho de 2025
+
+## Resolução do bug de duplas, trincas, quadras inexistentes
+
+### Segue o código da implementação:
+
+```c
+int quadra(FREQ_COUNTER *freq){
+
+    int j = 0;
+
+    //...
+    if (freq->valores[i] == 1){
+        if (freq->valores[19 - j] == 0){
+            freq->valores[19 - j] = i;
+            j++;
+
+            // Correção do bug de duplas, trincas, quadras inexistentes.
+            if (j == 5)
+                break;
+
+        }
+    }
+    //...
+
+}
+```
+
+Basta adicionar o `if (j == 5)` nas funções de sequência para que o loop seja interrompido quando as cinco maiores cartas forem encontradas para previnir que um valor seja em um índice indevido como havia sendo feito anteriormente.
+
 # 22 de junho de 2025
 
 ## Retorno da melhor sequência possível de um jogador com um par de cartas ou dois pares de cartas realizada. 

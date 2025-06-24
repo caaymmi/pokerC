@@ -120,13 +120,6 @@ int dupla(FREQ_COUNTER *freq){
     int cont_duplas = 0;
     int j = 0;
 
-    printf ("\n\n\n\nTESTE DE SANIDADE:\n\n\n\n");
-    printf ("JA FOI COMPUTADO NA melhor sequencia\n");
-    printf ("PRESENTE AO FIM DA FREQ COUNTER DE VALORES\n");
-    for (int i = 19; i >= 15; i--){
-        printf ("A CARTA DE VALOR: %d\n", freq->valores[i]);
-    }
-
     //Itera todo o array de frequências de valores.
     for (int i = 14; i >= 2; i--){
 
@@ -136,7 +129,8 @@ int dupla(FREQ_COUNTER *freq){
             if (freq->valores[19 - j] == 0){
                 freq->valores[19 - j] = i;
                 j++;
-
+                if (j == 5)
+                    break;
             }
         }
         //Se houver alguma carta que aparece duas vezes.
@@ -166,6 +160,8 @@ int trinca(FREQ_COUNTER *freq){
             if (freq->valores[19 - j] == 0){
                 freq->valores[19 - j] = i;
                 j++;
+                if (j == 5)
+                    break;
             }
         }
         //Se houver alguma carta que aparece três vezes.
@@ -196,6 +192,8 @@ int quadra(FREQ_COUNTER *freq){
             if (freq->valores[19 - j] == 0){
                 freq->valores[19 - j] = i;
                 j++;
+                if (j == 5)
+                    break;
             }
         }
         //Se houver alguma carta que aparece quatro vezes.
