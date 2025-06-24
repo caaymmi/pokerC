@@ -1,5 +1,79 @@
 # Implementações a Fazer
 
+## 24 de junho de 2025
+
+### Problema
+
+O programa está reconhecendo uma dupla inexistente e como ele reconhece ele tenta a retornar na melhor sequência possível, o que não é possível já que essa suposta dupla de cartas não existe na sequência auxiliar. 
+
+```c
+PRINTANDO A SEQUENCIA AUXILIAR DO jorge
+
+CARTA de ID: 43
+Quatro de Paus
+
+CARTA de ID: 9
+Nove de Copas
+
+CARTA de ID: 45
+Seis de Paus
+
+CARTA de ID: 11
+Valete de Copas
+
+CARTA de ID: 5
+Cinco de Copas
+
+CARTA de ID: 34
+Oito de Ouros
+
+CARTA de ID: 2
+Dois de Copas
+
+uma dupla
+
+EXIBINDO OS VALORES DA SEQUENCIA POSSIVEL:
+
+13      13      8       9       11
+
+EXIBINDO A MELHOR SEQUENCIA POSSIVEL:
+
+CARTA de ID: 6420836
+
+CARTA de ID: 0
+
+CARTA de ID: 34
+Oito de Ouros
+
+CARTA de ID: 9
+Nove de Copas
+
+CARTA de ID: 11
+Valete de Copas
+```
+
+Isso ocorre por uma sobrescritura de valores no vetor `freq->valores` que são necessários para a verificação de sequências. E isso se deve a sequência de if's e else if's abaixo.
+
+```c
+if (quadra(&freq) == 1){
+    //...
+    return 4;
+}
+else if (trinca(&freq) == 1){
+    //...
+    return 7;
+}
+else if (dupla(&freq) == 1){
+    //...
+    return 9;
+
+} else if (dupla(&freq) == 2){
+    //...
+    return 8;
+}
+```
+O problema ocorre pois estamos tratando com ponteiros e passagens por referências, portanto em cada uma dessas verificações o vetor `freq->valores` é sobrescrito com os valores das cartas que estão sendo verificadas, mesmo que sejam as mesmas.
+
 ## 22 de Junho de 2025
 
 ### Problema
